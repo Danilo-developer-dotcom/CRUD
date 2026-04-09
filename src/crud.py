@@ -8,7 +8,7 @@ class CRUD:
     def create(self, name: str, profession: str, payment: float):
         self.dbmanager.execute("insert into users (name, profession, payment) values (?, ?, ?)",
                                (name, profession, payment))
-        print("[OK] - Values entered successfully")
+        return True
 
     def read(self):
         fetch = self.dbmanager.select("select * from users", 1)
@@ -18,8 +18,8 @@ class CRUD:
         self.dbmanager.execute(f'''update users
                                  set {column_name} = ?
                                  where id = ?''', (new_value, row_id))
-        print("[OK] - Values updated")
+        return True
 
     def delete(self, row_id: int):
         self.dbmanager.execute(f"delete from users where id = ?", (row_id,))
-        print(f"[OK] - Row {row_id} deleted")
+        return True

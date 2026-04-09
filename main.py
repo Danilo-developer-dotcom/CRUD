@@ -35,7 +35,8 @@ while True:
             name = input("name: ")
             profession = input("Profession: ")
             payment = float(input("Payment: "))
-            crud.create(name, profession, payment)
+            if crud.create(name, profession, payment):
+                print("[OK] - Values entered successfully")
 
         # READ
         case 2:
@@ -62,7 +63,8 @@ while True:
             else:
                 new_value = input("New value: ")
 
-            crud.update(row_id, column_name, new_value)
+            if crud.update(row_id, column_name, new_value):
+                print("[OK] - Values updated")
 
         # DELETE
         case 4:
@@ -70,4 +72,5 @@ while True:
              if row_id is None:
                  print("[ERROR] - Invalid ID")
                  continue
-             crud.delete(row_id)
+             elif crud.delete(row_id):
+                 print(f"[OK] - Row {row_id} deleted")

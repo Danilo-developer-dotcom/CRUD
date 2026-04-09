@@ -1,27 +1,24 @@
 from src.dbmanager import DbManager
-from src.utils import validate_int, validate_float, menu
+from src.utils import validate_int, validate_float, menu, validate_column, validate_str
 from src.crud import CRUD
+
+dbmanager = DbManager()
+crud = CRUD(dbmanager)
 
 while True:
     menu()
     choice = validate_int("What do you want to do?\n>> ")
 
-    # VERIFY THE INTERVAL AND THE VALUE TYPE
-    try:
-        if 0 > choice or choice > 4:
-            print("[ERROR] - Invalid value")
-            continue
-    except TypeError:
+    # VERIFY THE INTERVAL
+    if choice < 0 or choice > 4:
         print("[ERROR] - Choose between 0 and 4")
         continue
 
-    crud = CRUD()
-    dbmanager = DbManager()
 
     # PREVENTS EMPTY DATABASE PROBLEMS
     if choice > 1:
-        if dbmanager.select("select * from users limit 1;", 2) is None:
-            print("[INFO] - The table is empty")
+        if dbmanager.select_one() is None:
+            print("[ERROR] - The table is empty")
             continue
 
     match choice:
@@ -32,9 +29,9 @@ while True:
             break
         # CREATE
         case 1:
-            name = input("name: ")
-            profession = input("Profession: ")
-            payment = float(input("Payment: "))
+            name = validate_str("Name", "name: ")
+            profession = validate_str("Profession", "Profession: ")
+            payment = validate_float("Payment: ")
             if crud.create(name, profession, payment):
                 print("[OK] - Values entered successfully")
 
@@ -47,30 +44,21 @@ while True:
         # UPDATE
         case 3:
             row_id = validate_int("Row ID: ")
-            if row_id is None:
-                print('[ERROR] - Invalid ID')
-                continue
 
-            # PREVENTS WRONG "column_name"2
-            column_name = input("Column name (name, profession, payment): ").lower()
-            if column_name not in ["name", "profession", "payment"]:
-                print("[ERROR] - Invalid column")
-                continue
+            # PREVENTS WRONG "column_name"
+            column_name = validate_column("Column id: ")
 
             # FOR 2 TYPES OF VALUES
             if column_name == "payment":
-                new_value = validate_float("New value: ")
+                new_value = validate_float("New_value: ")
             else:
-                new_value = input("New value: ")
+                new_value = validate_str(column_name.capitalize(), "New value: ")
 
             if crud.update(row_id, column_name, new_value):
                 print("[OK] - Values updated")
 
         # DELETE
         case 4:
-             row_id = validate_int("Row ID: ")
-             if row_id is None:
-                 print("[ERROR] - Invalid ID")
-                 continue
-             elif crud.delete(row_id):
-                 print(f"[OK] - Row {row_id} deleted")
+            row_id = validate_int("Row ID: ")
+            if crud.delete(row_id):
+                print(f"[OK] - Row {row_id} deleted")

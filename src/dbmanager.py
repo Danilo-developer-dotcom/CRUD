@@ -6,17 +6,28 @@ class DbManager:
         self.cursor = self.conn.cursor()
         self.create_table()
 
-    def execute(self, query, parameters):
-        self.cursor.execute(query, parameters)
+    def update(self, column_name, parameters):
+        self.cursor.execute(f'''update users
+                                 set {column_name} = ?
+                                 where id = ?''', parameters)
         self.conn.commit()
 
-    def select(self, query: str, fetch: int):
-        self.cursor.execute(query)
-        match fetch:
-            case 1:
-                return self.cursor.fetchall()
-            case 2:
-                return self.cursor.fetchone()
+    def delete(self, row_id):
+        self.cursor.execute(f"delete from users where id = ?", (row_id,))
+        self.conn.commit()
+
+    def insert(self, parameters):
+        self.cursor.execute("insert into users (name, profession, payment) values (?, ?, ?)",
+                            parameters)
+        self.conn.commit()
+
+    def select_all(self):
+        self.cursor.execute("select * from users")
+        return self.cursor.fetchall()
+
+    def select_one(self):
+        self.cursor.execute("select * from users limit 1;")
+        return self.cursor.fetchone()
 
     def create_table(self):
         self.cursor.execute('''create table if not exists users (

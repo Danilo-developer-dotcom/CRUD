@@ -4,14 +4,13 @@ def validate_int(message):
             return int(input(message))
         except (ValueError, TypeError):
             print("[ERROR] - Invalid Value")
-            menu()
             continue
 
-def validate_str(name, message):
+def validate_str(name):
     while True:
-        text = input(message)
+        text = input(name + ": ")
         if not text:
-            print(f"[ERROR] - {name} cannot be empty")
+            print(f"[ERROR] - {name.capitalize()} cannot be empty")
             continue
         else:
             return text

@@ -29,11 +29,11 @@ while True:
             break
         # CREATE
         case 1:
-            name = validate_str("Name", "name: ")
-            profession = validate_str("Profession", "Profession: ")
-            payment = validate_float("Payment: ")
-            if crud.create(name, profession, payment):
-                print("[OK] - Values entered successfully")
+            name = validate_str("name")
+            profession = validate_str("profession")
+            payment = validate_float("payment: ")
+            crud.create(name, profession, payment)
+            print("[OK] - Values entered successfully")
 
         # READ
         case 2:
@@ -50,9 +50,9 @@ while True:
 
             # FOR 2 TYPES OF VALUES
             if column_name == "payment":
-                new_value = validate_float("New_value: ")
+                new_value = validate_float("New value: ")
             else:
-                new_value = validate_str(column_name.capitalize(), "New value: ")
+                new_value = validate_str(column_name.capitalize())
 
             if crud.update(row_id, column_name, new_value):
                 print("[OK] - Values updated")

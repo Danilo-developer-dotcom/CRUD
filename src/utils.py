@@ -8,7 +8,7 @@ def validate_int(message):
 
 def validate_str(name):
     while True:
-        text = input(name + ": ")
+        text = input(name.capitalize() + ": ").strip()
         if not text:
             print(f"[ERROR] - {name.capitalize()} cannot be empty")
             continue

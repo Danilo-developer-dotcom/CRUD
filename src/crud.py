@@ -14,9 +14,9 @@ class CRUD:
         return fetch
 
     def update(self, row_id: int, column_name: str, new_value: str | float):
-        self.dbmanager.update(column_name, (new_value, row_id))
-        return True
+        result = self.dbmanager.update(column_name, (new_value, row_id))
+        return result > 0
 
     def delete(self, row_id: int):
-        self.dbmanager.delete(row_id)
-        return True
+        result = self.dbmanager.delete(row_id)
+        return result > 0

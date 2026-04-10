@@ -56,9 +56,14 @@ while True:
 
             if crud.update(row_id, column_name, new_value):
                 print("[OK] - Values updated")
+            else:
+                print("[ERROR] - No values updated")
 
         # DELETE
         case 4:
             row_id = validate_int("Row ID: ")
             if crud.delete(row_id):
                 print(f"[OK] - Row {row_id} deleted")
+            else:
+                print(f"[ERROR] - Row {row_id} not found")
+                continue

@@ -11,10 +11,13 @@ class DbManager:
                                  set {column_name} = ?
                                  where id = ?''', parameters)
         self.conn.commit()
+        return self.cursor.rowcount
+
 
     def delete(self, row_id):
         self.cursor.execute(f"delete from users where id = ?", (row_id,))
         self.conn.commit()
+        return self.cursor.rowcount
 
     def insert(self, parameters):
         self.cursor.execute("insert into users (name, profession, payment) values (?, ?, ?)",

@@ -2,7 +2,7 @@ import sqlite3
 
 class DbManager:
     def __init__(self):
-        self.conn = sqlite3.connect("crud.db")
+        self.conn = sqlite3.connect("app.db")
         self.cursor = self.conn.cursor()
         self.create_table()
 

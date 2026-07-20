@@ -1,7 +1,5 @@
 # CRUD (Python + SQLite)
 
-## 🇧🇷
-
 Aplicação de CRUD em Python utilizando SQLite.
 
 Projeto focado em:
@@ -15,29 +13,14 @@ Rodando via CLI.
 
 ---
 
-## 🇺🇸
-
-CRUD application built with Python and SQLite.
-
-Focused on:
-
-* database operations
-* layered structure
-* input validation
-* handling operations using `rowcount`
-
-CLI application.
-
----
-
-## Tech
+## Ferramentas
 
 * Python
 * SQLite
 
 ---
 
-## Run
+## Como Rodar
 
 ```bash
 git clone https://github.com/Danilo-developer-dotcom/CRUD.git
@@ -47,7 +30,7 @@ python main.py
 
 ---
 
-## Structure
+## Estrutura
 
 ```
 main.py
@@ -59,13 +42,13 @@ src/
 
 ---
 
-## Notes
+## Notas
 
-* SQLite database is created automatically (`app.db`)
+* O Banco de Dados SQLite é criado automaticamente(`app.db`)
 * CLI interface
 
 ---
 
-## Author
+## Autor
 
-Developed by **Danilo Emanuel de Almeida Matos**
+Desenvolvido por **Danilo Emanuel de Almeida Matos**
